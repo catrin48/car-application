@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配車サービスルート計算</title>
+    <script>
+        function updateChildInputs() {
+            const numChildren = document.getElementById("num_children").value;
+            const childInputsContainer = document.getElementById("child_inputs");
+            childInputsContainer.innerHTML = "";
+
+            for (let i = 1; i <= numChildren; i++) {
+                const div = document.createElement("div");
+                div.innerHTML = `
+                    <h4>子供 ${i} の情報</h4>
+                    <label for="child_name_${i}">名前:</label>
+                    <input type="text" id="child_name_${i}" name="child_name_${i}" required>
+                    <label for="child_address_${i}">住所:</label>
+                    <input type="text" id="child_address_${i}" name="child_address_${i}" required>
+                    <br><br>
+                `;
+                childInputsContainer.appendChild(div);
+            }
+        }
+        
+        function setCurrentTime() {
+            let now = new Date();
+            let hours = String(now.getHours()).padStart(2, '0');
+            let minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById("departure_time").value = `${hours}:${minutes}`;
+        }
+        
+        function adjustTime(minutes) {
+            let timeInput = document.getElementById("departure_time");
+            let currentTime = timeInput.value.split(":");
+            let hours = parseInt(currentTime[0]);
+            let mins = parseInt(currentTime[1]);
+
+            mins += minutes;
+            if (mins >= 60) {
+                hours += Math.floor(mins / 60);
+                mins = mins % 60;
+            } else if (mins < 0) {
+                hours += Math.floor(mins / 60);
+                mins = (mins % 60 + 60) % 60;
+            }
+
+            hours = (hours + 24) % 24;
+            timeInput.value = String(hours).padStart(2, '0') + ":" + String(mins).padStart(2, '0');
+        }
+        
+        window.onload = setCurrentTime;
+    </script>
+</head>
+<body>
+    <h1>配車サービスルート計算</h1>
+    <form method="POST">
+        <label for="departure_time">出発時刻:</label>
+        <input type="time" id="departure_time" name="departure_time" required>
+        <button type="button" onclick="adjustTime(-1)">− 1分</button>
+        <button type="button" onclick="adjustTime(1)">＋ 1分</button>
+        <br><br>
+
+        <label for="current_location_name">現在の場所（名前）:</label>
+        <input type="text" id="current_location_name" name="current_location_name" required>
+        <label for ="current_location">現在の場所(住所) :</label>
+        <input type="text" id="current_location" name="current_location" required>
+        <br><br>
+
+        <label for="num_children">子供の人数:</label>
+	<input type="number" id="num_children" name="num_children" min="1" max="10" required onchange="updateChildInputs()">
+
+	<br><br>
+
+        <div id="child_inputs">
+        </div>
+
+        <button type="submit">ルート計算</button>
+    </form>
+</body>
+</html>
