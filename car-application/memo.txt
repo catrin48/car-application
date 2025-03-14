@@ -1,3 +1,5 @@
-app1.py,a.pyは良い
-app.pyは文字化け
-理想は計算結果の画像のまま、pdf化したい。
+終　app.pyは文字化け
+終　理想は計算結果の画像のまま、pdf化したい。
+未　google mapのdirctions APIが使えなくなったのでroutes APIに変更。
+未　地図の可視化
+未　訪問にかかる時間の追加
