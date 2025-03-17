@@ -1,0 +1,18 @@
+配車アプリでデプロイ、pdf化してある。
+文字化けしない。完成です。
+これがオリジナル
+ori.pyに関しては文字化けする。
+main0.pyがとりあえずの完成形。
+main.pyを変更していく。
+google maps apiキーを環境変数で管理
+エラーハンドリング
+セッション管理
+デザイン
+main.pyではなく、他のファイルで実行する場合
+例えばmain0.pyならDocker内に変更する箇所複数ある。
+directions-backend.googleapis.com
+cloudbuild.googleapis.com
+pubsub.googleapis.com
+iam.googleapis.com
+logging.googleapis.com
+run.googleapis.com

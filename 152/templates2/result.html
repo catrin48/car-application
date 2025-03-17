@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算結果</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>ルート計算結果</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ルート</th>
+                <th>総距離</th>
+                <th>総時間</th>
+                <th>各地点の到着時刻</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route in route_details %}
+            <tr>
+                <td>{{ route.route }}</td>
+                <td>{{ route.distance }}</td>
+                <td>{{ route.duration }}</td>
+                <td>
+                    {% for item in route.arrival_times %}
+                        {{ item.name }}: {{ item.arrival_time }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/">戻る</a>
+</body>
+</html>
+

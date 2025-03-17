@@ -1,0 +1,6 @@
+Flask
+googlemaps
+requests
+gunicorn
+reportlab
+flask-cors
